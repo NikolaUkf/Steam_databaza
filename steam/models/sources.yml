@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: Surové dáta zo Steam datasetu nahraté cez \copy
+    schema: bronze
+    tables:
+      - name: games
+        description: Hry a doplnky v obchode Steam
+      - name: users
+        description: Anonymizované profily používateľov
+      - name: recommendations
+        description: Recenzie používateľov (odporúča / neodporúča)

@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: dim_game
+    description: Dimenzia hier (SCD 1)
+    columns:
+      - name: game_id
+        data_tests:
+          - not_null
+          - unique
+  - name: dim_user
+    description: Dimenzia pouzivatelov (SCD 1)
+    columns:
+      - name: user_id
+        data_tests:
+          - not_null
+          - unique
+  - name: dim_date
+    description: Datumova dimenzia (SCD 0)
+    columns:
+      - name: date_id
+        data_tests:
+          - not_null
+          - unique
+  - name: dim_platform
+    description: Dimenzia platforiem (SCD 0)
+    columns:
+      - name: platform_id
+        data_tests:
+          - not_null
+          - unique
+  - name: fact_recommendations
+    description: Faktova tabulka recenzii
+    columns:
+      - name: review_id
+        data_tests:
+          - not_null
+          - unique
+      - name: game_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_game')
+                field: game_id
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_user')
+                field: user_id
+      - name: date_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: platform_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_platform')
+                field: platform_id
+      - name: is_recommended
+        data_tests:
+          - not_null
+      - name: user_review_number
+        data_tests:
+          - not_null
